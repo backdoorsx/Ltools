@@ -12,7 +12,7 @@ def log(text_widget, message):
     text_widget.insert(END, message + "\n")
     text_widget.see(END)
     lines = text_widget.get("1.0", END).split("\n")
-    if len(lines) > 6:
+    if len(lines) > 8:
         text_widget.delete("1.0", "2.0")
 
 
@@ -98,7 +98,7 @@ def start_stop(path_entry, from_entry, to_entry, convert_var, text_widget, butto
 def create_gui():
     root = Tk()
     root.title("Image Tool")
-    root.geometry("750x250")
+    root.geometry("750x180")
 
     # set terminal-like font
     default_font = ("Courier New", 10)
