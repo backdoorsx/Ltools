@@ -4,6 +4,8 @@ import time
 from tkinter import Tk, Entry, Label, Button, Checkbutton, IntVar, Text, END, filedialog, messagebox
 from PIL import Image
 
+# after convert delete original file
+
 running = False
 
 def log(text_widget, message):
@@ -38,13 +40,17 @@ def convert_files(path, ext_from, ext_to, text_widget):
         if not running:
             break
         if filename.lower().endswith(ext_from):
-            old_path = os.path.join(path, filename)
             new_filename = filename[:-len(ext_from)] + ext_to
             new_path = os.path.join(path, new_filename)
+            # skip if converted file already exists
+            if os.path.exists(new_path):
+                continue
+            old_path = os.path.join(path, filename)
             try:
                 with Image.open(old_path) as img:
                     img.save(new_path, ext_to.replace('.', '').upper())
                 log(text_widget, f"Converted: {filename} -> {new_filename}")
+                os.remove(old_path)  # remove original to prevent infinite loop
             except Exception as e:
                 log(text_widget, f"Error: {filename} ({e})")
 
