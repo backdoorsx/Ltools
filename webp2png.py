@@ -4,6 +4,7 @@ import time
 from tkinter import Tk, Entry, Label, Button, Checkbutton, IntVar, Text, END, filedialog, messagebox
 from PIL import Image
 
+# pyinstaller webp2png.py --clean --onefile --noconsole --name webp2png.exe -i 256.ico
 # after convert delete original file
 
 running = False
